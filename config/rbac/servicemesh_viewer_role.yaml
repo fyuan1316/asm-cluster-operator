@@ -1,0 +1,20 @@
+# permissions for end users to view servicemeshes.
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRole
+metadata:
+  name: servicemesh-viewer-role
+rules:
+- apiGroups:
+  - operator.asm.alauda.io
+  resources:
+  - servicemeshes
+  verbs:
+  - get
+  - list
+  - watch
+- apiGroups:
+  - operator.asm.alauda.io
+  resources:
+  - servicemeshes/status
+  verbs:
+  - get

@@ -1,0 +1,121 @@
+
+---
+apiVersion: apiextensions.k8s.io/v1beta1
+kind: CustomResourceDefinition
+metadata:
+  annotations:
+    controller-gen.kubebuilder.io/version: v0.2.5
+  creationTimestamp: null
+  name: servicemeshes.operator.asm.alauda.io
+spec:
+  group: operator.asm.alauda.io
+  names:
+    kind: ServiceMesh
+    listKind: ServiceMeshList
+    plural: servicemeshes
+    singular: servicemesh
+  scope: Namespaced
+  subresources:
+    status: {}
+  validation:
+    openAPIV3Schema:
+      description: ServiceMesh is the Schema for the servicemeshes API
+      properties:
+        apiVersion:
+          description: 'APIVersion defines the versioned schema of this representation
+            of an object. Servers should convert recognized schemas to the latest
+            internal value, and may reject unrecognized values. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#resources'
+          type: string
+        kind:
+          description: 'Kind is a string value representing the REST resource this
+            object represents. Servers may infer this from the endpoint the client
+            submits requests to. Cannot be updated. In CamelCase. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#types-kinds'
+          type: string
+        metadata:
+          type: object
+        spec:
+          description: ServiceMeshSpec defines the desired state of ServiceMesh
+          properties:
+            config:
+              description: Config       unstructured.Unstructured `json:"config"`
+              type: string
+            foo:
+              description: Foo is an example field of ServiceMesh. Edit ServiceMesh_types.go
+                to remove/update
+              type: string
+            globalConfig:
+              properties:
+                caBundle:
+                  type: string
+                clusterName:
+                  type: string
+                serverAddress:
+                  type: string
+                token:
+                  type: string
+              required:
+              - caBundle
+              - clusterName
+              - serverAddress
+              - token
+              type: object
+            version:
+              type: string
+          required:
+          - config
+          - globalConfig
+          - version
+          type: object
+        status:
+          description: ServiceMeshStatus defines the observed state of ServiceMesh
+          properties:
+            conditions:
+              items:
+                properties:
+                  lastTransitionTime:
+                    description: LastTransitionTime is the last time the condition
+                      transitioned from one status to another. We use VolatileTime
+                      in place of metav1.Time to exclude this from creating equality.Semantic
+                      differences (all other things held constant).
+                    format: date-time
+                    type: string
+                  message:
+                    description: A human readable message indicating details about
+                      the transition.
+                    type: string
+                  reason:
+                    description: The reason for the condition's last transition.
+                    type: string
+                  status:
+                    description: Status of the condition, one of True, False, Unknown.
+                    type: string
+                  type:
+                    description: Type of condition.
+                    type: string
+                required:
+                - status
+                - type
+                type: object
+              type: array
+            phase:
+              description: 'INSERT ADDITIONAL STATUS FIELD - define observed state
+                of cluster Important: Run "make" to regenerate code after modifying
+                this file'
+              type: string
+            version:
+              type: string
+          required:
+          - phase
+          type: object
+      type: object
+  version: v1alpha1
+  versions:
+  - name: v1alpha1
+    served: true
+    storage: true
+status:
+  acceptedNames:
+    kind: ""
+    plural: ""
+  conditions: []
+  storedVersions: []

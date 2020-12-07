@@ -1,0 +1,24 @@
+# permissions for end users to edit servicemeshes.
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRole
+metadata:
+  name: servicemesh-editor-role
+rules:
+- apiGroups:
+  - operator.asm.alauda.io
+  resources:
+  - servicemeshes
+  verbs:
+  - create
+  - delete
+  - get
+  - list
+  - patch
+  - update
+  - watch
+- apiGroups:
+  - operator.asm.alauda.io
+  resources:
+  - servicemeshes/status
+  verbs:
+  - get

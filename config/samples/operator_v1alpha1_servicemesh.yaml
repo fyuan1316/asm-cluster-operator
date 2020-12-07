@@ -1,0 +1,49 @@
+apiVersion: operator.asm.alauda.io/v1alpha1
+kind: ServiceMesh
+metadata:
+  name: servicemesh-sample
+spec:
+  # Add fields here
+  foo: bar
+  version: v3.3.0
+  globalConfig:
+    clusterName: global
+    serverAddress: https://192.168.22.1:6443
+    caBundle: ""
+    token: "MWpFN3N4Q2FUWDBzc1VZUGFqSG5mVXNGM2dl"
+  config: |
+    apiVersion: asm.alauda.io/v1alpha1
+    kind: ServiceMesh
+    metadata:
+      annotations:
+        asm.cpaas.io/creator: admin
+        asm.cpaas.io/display-name: ""
+      labels:
+        asm.cpaas.io/cluster: asm
+      name: asm
+      namespace: cpaas-system
+    spec:
+      cluster: asm
+      clusterNodeIps:
+      - 192.168.22.5
+      egress:
+        deployMode: Float
+      elasticsearch:
+        isDefault: true
+        url: http://192.168.22.2:9200
+      externalHost: ""
+      globalIngressHost: https://asm-dev.alauda.cn/
+      highAvailability: false
+      ingressHost: ""
+      ingressScheme: https
+      ipranges:
+        ranges:
+        - '*'
+      istioSidecar:
+        cpuValue: 50m
+        memoryValue: 64Mi
+      istioSidecarInjectorPolicy: false
+      prometheusURL: http://192.168.22.5:30900
+      registryAddress: 192.168.22.1:60080
+      traceSampling: 100
+
